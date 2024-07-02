@@ -41,7 +41,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
         jwtTools.verifyToken(accessToken);
 
         String userId = jwtTools.extractIdFromToken(accessToken);
-        Dipendente currentUser = dipe.findById(UUID.fromString(userId));
+        Dipendente currentUser = dipendenteService.findById(UUID.fromString(userId));
 
         // 4.2 Trovato l'utente posso associarlo al Security Context, praticamente questo equivale ad 'associare' l'utente autenticato alla richiesta corrente
         Authentication authentication = new UsernamePasswordAuthenticationToken(currentUser, null, currentUser.getAuthorities());

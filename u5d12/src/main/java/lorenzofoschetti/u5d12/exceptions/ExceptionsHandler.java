@@ -2,6 +2,7 @@ package lorenzofoschetti.u5d12.exceptions;
 
 import lorenzofoschetti.u5d12.payloads.ErrorsPayload;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -39,5 +40,12 @@ public class ExceptionsHandler {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ErrorsPayload handleUnauthorized(UnauthorizedException ex) {
         return new ErrorsPayload(ex.getMessage(), LocalDateTime.now());
+    }
+
+    @ExceptionHandler(AuthorizationDeniedException.class)
+    // Questo metodo dovrà rispondere con 403
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErrorsPayload handleForbidden(AuthorizationDeniedException ex) {
+        return new ErrorsPayload("Non hai accesso a questa funzionalità", LocalDateTime.now());
     }
 }

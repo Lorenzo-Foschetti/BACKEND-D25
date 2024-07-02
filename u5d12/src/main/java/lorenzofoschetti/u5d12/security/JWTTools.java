@@ -34,4 +34,9 @@ public class JWTTools {
             // Non importa se l'eccezione lanciata da .parse() sia un'eccezione perché il token è scaduto o malformato o manipolato, a noi interessa solo che il risultato sia un 401
         }
     }
+
+    public String extractIdFromToken(String token) {
+        return Jwts.parser().verifyWith(Keys.hmacShaKeyFor(secret.getBytes())).build()
+                .parseSignedClaims(token).getPayload().getSubject(); // Il subject è l'id dell'utente
+    }
 }
