@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +21,9 @@ import java.util.UUID;
 
 @Service
 public class DipendenteService {
+
+    @Autowired
+    private PasswordEncoder bcrypt;
 
     @Autowired
     private Cloudinary cloudinaryUploader;
@@ -43,7 +47,7 @@ public class DipendenteService {
         );
 
 
-        Dipendente newDipendente = new Dipendente(body.name(), body.surname(), body.username(), body.email(), body.password());
+        Dipendente newDipendente = new Dipendente(body.name(), body.surname(), body.username(), body.email(), bcrypt.encode(body.password()));
 
         newDipendente.setAvatar("https://ui-avatars.com/api/?name=" + body.name() + "+" + body.surname());
 

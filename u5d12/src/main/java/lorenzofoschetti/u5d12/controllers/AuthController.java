@@ -5,8 +5,8 @@ import lorenzofoschetti.u5d12.exceptions.BadRequestException;
 import lorenzofoschetti.u5d12.payloads.NewDipendentePayload;
 import lorenzofoschetti.u5d12.payloads.UserLoginPayload;
 import lorenzofoschetti.u5d12.payloads.UserLoginResponsePayload;
-import lorenzofoschetti.u5d12.services.AuthService;
-import lorenzofoschetti.u5d12.services.DipendenteService;
+import lorenzofoschetti.u5d12.service.AuthService;
+import lorenzofoschetti.u5d12.service.DipendenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+
 
     @Autowired
     private AuthService authService;
